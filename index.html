@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en"><head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<html lang="en">
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Marcin Karpiński — Senior Unity Developer</title>
-<link rel="preconnect" href="https://fonts.googleapis.com/">
-<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
-<link href="Marcin%20Karpi%C5%84ski%20%E2%80%94%20Senior%20Unity%20Developer_files/css2.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -504,7 +504,43 @@
   .delay-4 { animation-delay: 0.5s; }
   .delay-5 { animation-delay: 0.64s; }
 
-  /* ── CURSOR DOT ── */
+  .project-cta {
+    background: var(--teal-dim) !important;
+    border: 1px solid var(--teal-border) !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 260px;
+  }
+  .project-cta:hover {
+    background: rgba(46,232,196,0.18) !important;
+    border-color: var(--teal) !important;
+  }
+  .proj-cta-inner { text-align: center; padding: 1rem; }
+  .proj-cta-icon {
+    font-size: 2.5rem;
+    color: var(--teal);
+    font-family: var(--mono);
+    line-height: 1;
+    margin-bottom: 1rem;
+    opacity: 0.7;
+  }
+  .proj-cta-btn {
+    display: inline-block;
+    padding: 0.6rem 1.5rem;
+    border: 1px solid var(--teal-border);
+    color: var(--teal);
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    background: rgba(46,232,196,0.08);
+    transition: all 0.2s;
+  }
+  .proj-cta-btn:hover {
+    background: rgba(46,232,196,0.2);
+    border-color: var(--teal);
+  }
   .cursor {
     display: inline-block;
     width: 2px;
@@ -534,12 +570,13 @@
 
 <!-- NAV -->
 <nav>
-  <span class="nav-logo">MK / XR DEV</span>
+  <span class="nav-logo">Marcin Karpiński</span>
   <div class="nav-links">
     <a href="#about">About</a>
     <a href="#experience">Work</a>
     <a href="#projects">Projects</a>
     <a href="#contact">Contact</a>
+    <a href="https://www.linkedin.com/in/marcin-karpi%C5%84ski-32b26212a/" target="_blank">LinkedIn ↗</a>
   </div>
 </nav>
 
@@ -588,9 +625,7 @@
   <div class="about-grid">
     <div class="about-text">
       <p>I'm a versatile Unity developer specialising in <strong>medical and enterprise XR</strong> — a rare combination of deep technical skill and domain expertise in healthcare technology.</p>
-      <p>My work spans <strong>surgical planning tools</strong>, <strong>VR rehabilitation games</strong>, <strong>clinical examination systems</strong>, and <strong>multiplayer AR platforms</strong>.
- I'm comfortable owning a project end-to-end: from architecture 
-decisions to Android native integration and performance profiling.</p>
+      <p>My work spans <strong>surgical planning tools</strong>, <strong>VR rehabilitation games</strong>, <strong>clinical examination systems</strong>, and <strong>multiplayer AR platforms</strong>. I'm comfortable owning a project end-to-end: from architecture decisions to Android native integration and performance profiling.</p>
       <p>I've shipped products for <strong>Meta Quest</strong>, <strong>Microsoft HoloLens</strong>, <strong>custom VR headsets</strong>, and mobile platforms — with a strong focus on performance, reliability, and user experience in clinical settings.</p>
     </div>
     <div class="skills-grid">
@@ -647,7 +682,7 @@ decisions to Android native integration and performance profiling.</p>
   </div>
   <div class="exp-list">
 
-    <div class="exp-item" style="opacity: 0; transform: translateY(20px); transition: opacity 0.5s, transform 0.5s;">
+    <div class="exp-item">
       <div class="exp-date">2025 — 2026</div>
       <div>
         <div class="exp-company">RadiusXR</div>
@@ -661,7 +696,7 @@ decisions to Android native integration and performance profiling.</p>
       </div>
     </div>
 
-    <div class="exp-item" style="opacity: 0; transform: translateY(20px); transition: opacity 0.5s, transform 0.5s;">
+    <div class="exp-item">
       <div class="exp-date">2017 — 2025</div>
       <div>
         <div class="exp-company">ApoQlar</div>
@@ -677,7 +712,7 @@ decisions to Android native integration and performance profiling.</p>
       </div>
     </div>
 
-    <div class="exp-item" style="opacity: 0; transform: translateY(20px); transition: opacity 0.5s, transform 0.5s;">
+    <div class="exp-item">
       <div class="exp-date">2022 — 2023</div>
       <div>
         <div class="exp-company">Pravna</div>
@@ -702,7 +737,7 @@ decisions to Android native integration and performance profiling.</p>
   </div>
   <div class="projects-grid">
 
-    <div class="project-card" style="opacity: 0; transform: translateY(20px); transition: opacity 0.5s, transform 0.5s;">
+    <div class="project-card">
       <div class="proj-tags">
         <span class="proj-tag">VR</span>
         <span class="proj-tag">Meta Quest</span>
@@ -710,14 +745,10 @@ decisions to Android native integration and performance profiling.</p>
         <span class="proj-tag">Multiplayer</span>
       </div>
       <div class="proj-title">Holomedicine Spaces</div>
-      <p class="proj-desc">A VR social platform for medical 
-professionals enabling collaborative training, meetings, and 
-simulations. Features themed rooms (operating room, conference, 
-training, AI), real-time collaboration, object interaction, and an AI 
-chatbot.</p>
+      <p class="proj-desc">A VR social platform for medical professionals enabling collaborative training, meetings, and simulations. Features themed rooms (operating room, conference, training, AI), real-time collaboration, object interaction, and an AI chatbot.</p>
     </div>
 
-    <div class="project-card" style="opacity: 0; transform: translateY(20px); transition: opacity 0.5s, transform 0.5s;">
+    <div class="project-card">
       <div class="proj-tags">
         <span class="proj-tag">AR</span>
         <span class="proj-tag">HoloLens</span>
@@ -725,13 +756,10 @@ chatbot.</p>
         <span class="proj-tag">Multiplayer</span>
       </div>
       <div class="proj-title">VSI HoloMedicine</div>
-      <p class="proj-desc">Advanced medical AR application for HoloLens 
-enabling 3D manipulation of MRI/CT imaging data. Supports surgery 
-planning, tissue segmentation, annotations, multiplayer object sharing, 
-and integrated video consultation.</p>
+      <p class="proj-desc">Advanced medical AR application for HoloLens enabling 3D manipulation of MRI/CT imaging data. Supports surgery planning, tissue segmentation, annotations, multiplayer object sharing, and integrated video consultation.</p>
     </div>
 
-    <div class="project-card" style="opacity: 0; transform: translateY(20px); transition: opacity 0.5s, transform 0.5s;">
+    <div class="project-card">
       <div class="proj-tags">
         <span class="proj-tag">VR</span>
         <span class="proj-tag">Meta Quest</span>
@@ -739,13 +767,10 @@ and integrated video consultation.</p>
         <span class="proj-tag">AI</span>
       </div>
       <div class="proj-title">Beer Pong VR Rehab</div>
-      <p class="proj-desc">VR game combining physical rehabilitation 
-with entertainment. AI evaluates patient movement quality, followed by a
- physics-based beer pong session. Available in single and multiplayer 
-modes.</p>
+      <p class="proj-desc">VR game combining physical rehabilitation with entertainment. AI evaluates patient movement quality, followed by a physics-based beer pong session. Available in single and multiplayer modes.</p>
     </div>
 
-    <div class="project-card" style="opacity: 0; transform: translateY(20px); transition: opacity 0.5s, transform 0.5s;">
+    <div class="project-card">
       <div class="proj-tags">
         <span class="proj-tag">VR</span>
         <span class="proj-tag">Android</span>
@@ -753,13 +778,10 @@ modes.</p>
         <span class="proj-tag">Custom HW</span>
       </div>
       <div class="proj-title">Vision Field Examination</div>
-      <p class="proj-desc">Clinical VR application for testing patients'
- visual field. Paired with an Android tablet interface for 
-ophthalmologists to configure exams, control test flow, and manage 
-patient data.</p>
+      <p class="proj-desc">Clinical VR application for testing patients' visual field. Paired with an Android tablet interface for ophthalmologists to configure exams, control test flow, and manage patient data.</p>
     </div>
 
-    <div class="project-card" style="opacity: 0; transform: translateY(20px); transition: opacity 0.5s, transform 0.5s;">
+    <div class="project-card">
       <div class="proj-tags">
         <span class="proj-tag">VR</span>
         <span class="proj-tag">Meta Quest</span>
@@ -767,36 +789,40 @@ patient data.</p>
         <span class="proj-tag">CMS</span>
       </div>
       <div class="proj-title">Onboarding VR</div>
-      <p class="proj-desc">Immersive onboarding application for new 
-employees with multiple themed rooms — interactive office, quiz room, 
-360° video space, factory simulation, and a final quiz. Includes server 
-support for remote branding and result submission.</p>
+      <p class="proj-desc">Immersive onboarding application for new employees with multiple themed rooms — interactive office, quiz room, 360° video space, factory simulation, and a final quiz. Includes server support for remote branding and result submission.</p>
     </div>
 
-  </div>
+    <div class="project-card project-cta">
+      <div class="proj-cta-inner">
+        <div class="proj-cta-icon">+</div>
+        <div class="proj-title" style="font-size:20px; margin-bottom: 0.75rem;">Your next project</div>
+        <p class="proj-desc" style="margin-bottom: 1.5rem;">Have a medical XR, enterprise VR, or simulation idea? Let's build something remarkable together.</p>
+        <a href="mailto:marjackarpinski@gmail.com" class="proj-cta-btn">Get in touch →</a>
+      </div>
+    </div>
 </section>
 
 <!-- CERTS -->
 <section id="certs">
   <div class="section-header">
     <span class="section-num">04</span>
-    <h2 class="section-title-text">Certifications</h2>
+    <h2 class="section-title-text">Education & Certifications</h2>
     <div class="section-line"></div>
   </div>
   <div class="certs-row">
-    <div class="cert-card" style="opacity: 0; transform: translateY(20px); transition: opacity 0.5s, transform 0.5s;">
+    <div class="cert-card">
       <div class="cert-year">2021</div>
       <div class="cert-name">Unity Certified Professional: Programmer</div>
       <div class="cert-issuer">Unity Technologies</div>
     </div>
-    <div class="cert-card" style="opacity: 0; transform: translateY(20px); transition: opacity 0.5s, transform 0.5s;">
+    <div class="cert-card">
       <div class="cert-year">2017</div>
       <div class="cert-name">Certified Unity Developer</div>
       <div class="cert-issuer">Unity Technologies</div>
     </div>
-    <div class="cert-card" style="opacity: 0; transform: translateY(20px); transition: opacity 0.5s, transform 0.5s;">
+    <div class="cert-card">
       <div class="cert-year">2011 — 2015</div>
-      <div class="cert-name">BSc Electronics &amp; Telecommunications</div>
+      <div class="cert-name">BSc Electronics & Telecommunications</div>
       <div class="cert-issuer">Poznań University of Technology</div>
     </div>
   </div>
@@ -827,9 +853,9 @@ support for remote branding and result submission.</p>
         <span class="contact-link-label">Location</span>
         Poznań, Poland
       </a>
-      <a href="#" class="contact-link" id="linkedin-link">
+      <a href="https://www.linkedin.com/in/marcin-karpi%C5%84ski-32b26212a/" target="_blank" class="contact-link">
         <span class="contact-link-label">LinkedIn</span>
-        Add your LinkedIn URL →
+        linkedin.com/in/marcin-karpiński
       </a>
     </div>
   </div>
@@ -857,6 +883,5 @@ support for remote branding and result submission.</p>
     observer.observe(el);
   });
 </script>
-
-
-</body></html>
+</body>
+</html>
