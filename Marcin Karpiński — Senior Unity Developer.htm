@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marcin Karpiński — Senior Unity Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+<link href="Marcin%20Karpi%C5%84ski%20%E2%80%94%20Senior%20Unity%20Developer_files/css2.css" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #080d14;
+    --bg2: #0e1520;
+    --bg3: #141e2e;
+    --teal: #2ee8c4;
+    --teal-dim: rgba(46,232,196,0.12);
+    --teal-border: rgba(46,232,196,0.25);
+    --text: #e8edf5;
+    --muted: #6b7c99;
+    --mono: 'Space Mono', monospace;
+    --sans: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.5;
+  }
+
+  /* ── GRID LINES ── */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(46,232,196,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(46,232,196,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 4rem;
+    background: rgba(8,13,20,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(46,232,196,0.1);
+  }
+
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--teal);
+    letter-spacing: 0.05em;
+  }
+
+  .nav-links { display: flex; gap: 2.5rem; }
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--teal); }
+
+  /* ── HERO ── */
+  #hero {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 4rem 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .hero-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--teal);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .hero-tag::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 1px;
+    background: var(--teal);
+  }
+
+  h1 {
+    font-family: var(--sans);
+    font-size: clamp(3rem, 7vw, 6.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.25rem;
+  }
+  h1 span { color: var(--teal); }
+
+  .hero-sub {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--muted);
+    margin: 1.5rem 0 2.5rem;
+    max-width: 540px;
+    line-height: 1.8;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(46,232,196,0.1);
+  }
+  .stat-num {
+    font-family: var(--mono);
+    font-size: 2.5rem;
+    color: var(--teal);
+    line-height: 1;
+    display: block;
+  }
+  .stat-label {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    display: block;
+    margin-top: 0.4rem;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 2.5rem;
+    padding: 0.85rem 2rem;
+    border: 1px solid var(--teal-border);
+    color: var(--teal);
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: var(--teal-dim);
+    transition: all 0.25s;
+    width: fit-content;
+  }
+  .hero-cta:hover {
+    background: rgba(46,232,196,0.2);
+    border-color: var(--teal);
+    gap: 1.25rem;
+  }
+
+  /* ── SCROLL INDICATOR ── */
+  .scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+  .scroll-line {
+    width: 40px;
+    height: 1px;
+    background: var(--muted);
+    animation: scrollpulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollpulse {
+    0%, 100% { width: 40px; opacity: 0.4; }
+    50% { width: 60px; opacity: 1; }
+  }
+
+  /* ── SECTIONS ── */
+  section {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 5rem 4rem;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    margin-bottom: 3.5rem;
+  }
+  .section-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--teal);
+    letter-spacing: 0.15em;
+  }
+  .section-title-text {
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+  }
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(46,232,196,0.3), transparent);
+  }
+
+  /* ── ABOUT ── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .about-text p {
+    color: var(--muted);
+    margin-bottom: 1rem;
+    font-size: 15px;
+    line-height: 1.8;
+  }
+  .about-text p strong { color: var(--text); font-weight: 500; }
+
+  .skills-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .skill-group-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--teal);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .skill-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 4px 10px;
+    border: 1px solid rgba(46,232,196,0.2);
+    color: #a0b4cc;
+    background: rgba(46,232,196,0.04);
+    letter-spacing: 0.03em;
+    transition: all 0.2s;
+  }
+  .skill-tag:hover {
+    border-color: var(--teal);
+    color: var(--teal);
+    background: var(--teal-dim);
+  }
+
+  /* ── EXPERIENCE ── */
+  .exp-list { display: flex; flex-direction: column; gap: 0; }
+
+  .exp-item {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 0 3rem;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    position: relative;
+  }
+  .exp-item::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 0;
+    background: linear-gradient(180deg, rgba(46,232,196,0.08), transparent);
+    transition: width 0.4s;
+  }
+  .exp-item:hover::before { width: 4px; }
+
+  .exp-date {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    padding-top: 0.2rem;
+  }
+  .exp-company {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 0.2rem;
+  }
+  .exp-role {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--teal);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .exp-bullets { list-style: none; }
+  .exp-bullets li {
+    font-size: 14px;
+    color: var(--muted);
+    padding: 0.3rem 0;
+    padding-left: 1.25rem;
+    position: relative;
+    line-height: 1.6;
+  }
+  .exp-bullets li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--teal);
+    font-family: var(--mono);
+  }
+
+  /* ── PROJECTS ── */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5px;
+    background: rgba(46,232,196,0.1);
+    border: 1px solid rgba(46,232,196,0.1);
+  }
+  .project-card {
+    background: var(--bg);
+    padding: 2rem;
+    transition: background 0.25s;
+    cursor: default;
+  }
+  .project-card:hover { background: var(--bg3); }
+
+  .proj-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 1rem;
+  }
+  .proj-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 2px 8px;
+    border: 1px solid rgba(46,232,196,0.25);
+    color: var(--teal);
+    letter-spacing: 0.08em;
+  }
+  .proj-title {
+    font-size: 17px;
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+  }
+  .proj-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* ── CERTS ── */
+  .certs-row {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .cert-card {
+    flex: 1;
+    min-width: 240px;
+    padding: 1.75rem;
+    border: 1px solid rgba(46,232,196,0.15);
+    background: var(--bg2);
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.25s;
+  }
+  .cert-card::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 60px; height: 60px;
+    background: radial-gradient(circle at top right, rgba(46,232,196,0.1), transparent 70%);
+  }
+  .cert-card:hover { border-color: var(--teal); }
+  .cert-year {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--teal);
+    margin-bottom: 0.5rem;
+  }
+  .cert-name {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+  .cert-issuer {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 0.3rem;
+  }
+
+  /* ── CONTACT ── */
+  #contact {
+    border-top: 1px solid rgba(46,232,196,0.1);
+  }
+  .contact-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  .contact-headline {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 300;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+  .contact-headline span { color: var(--teal); }
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid rgba(46,232,196,0.1);
+    background: var(--bg2);
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.2s;
+    font-size: 14px;
+  }
+  .contact-link:hover {
+    border-color: var(--teal-border);
+    background: var(--teal-dim);
+    color: var(--teal);
+  }
+  .contact-link-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    min-width: 60px;
+  }
+  .contact-link:hover .contact-link-label { color: var(--teal); }
+
+  /* ── FOOTER ── */
+  footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up { animation: fadeUp 0.7s ease both; }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.22s; }
+  .delay-3 { animation-delay: 0.36s; }
+  .delay-4 { animation-delay: 0.5s; }
+  .delay-5 { animation-delay: 0.64s; }
+
+  /* ── CURSOR DOT ── */
+  .cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    background: var(--teal);
+    vertical-align: middle;
+    animation: blink 1.1s step-end infinite;
+    margin-left: 4px;
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    #hero, section { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .about-grid, .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .hero-stats { flex-wrap: wrap; gap: 1.5rem; }
+    .scroll-hint { left: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">MK / XR DEV</span>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#experience">Work</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-tag fade-up">Senior Unity Developer · Poznań, Poland</div>
+  <h1 class="fade-up delay-1">Marcin<br><span>Karpiński</span><span class="cursor"></span></h1>
+  <p class="hero-sub fade-up delay-2">
+    Building immersive medical XR applications for 10+ years.<br>
+    Specialist in VR/AR for clinical, enterprise, and rehabilitation use cases.
+  </p>
+  <a href="#contact" class="hero-cta fade-up delay-3">
+    Get in touch →
+  </a>
+  <div class="hero-stats fade-up delay-4">
+    <div>
+      <span class="stat-num">10+</span>
+      <span class="stat-label">years Unity</span>
+    </div>
+    <div>
+      <span class="stat-num">8+</span>
+      <span class="stat-label">years medical XR</span>
+    </div>
+    <div>
+      <span class="stat-num">5</span>
+      <span class="stat-label">shipped projects</span>
+    </div>
+    <div>
+      <span class="stat-num">3</span>
+      <span class="stat-label">XR platforms</span>
+    </div>
+  </div>
+  <div class="scroll-hint fade-up delay-5">
+    <span class="scroll-line"></span>
+    scroll
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2 class="section-title-text">About</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm a versatile Unity developer specialising in <strong>medical and enterprise XR</strong> — a rare combination of deep technical skill and domain expertise in healthcare technology.</p>
+      <p>My work spans <strong>surgical planning tools</strong>, <strong>VR rehabilitation games</strong>, <strong>clinical examination systems</strong>, and <strong>multiplayer AR platforms</strong>.
+ I'm comfortable owning a project end-to-end: from architecture 
+decisions to Android native integration and performance profiling.</p>
+      <p>I've shipped products for <strong>Meta Quest</strong>, <strong>Microsoft HoloLens</strong>, <strong>custom VR headsets</strong>, and mobile platforms — with a strong focus on performance, reliability, and user experience in clinical settings.</p>
+    </div>
+    <div class="skills-grid">
+      <div>
+        <div class="skill-group-label">Core</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Unity Engine</span>
+          <span class="skill-tag">C#</span>
+          <span class="skill-tag">OpenXR</span>
+          <span class="skill-tag">XR Toolkit</span>
+          <span class="skill-tag">MRTK</span>
+          <span class="skill-tag">Oculus SDK</span>
+        </div>
+      </div>
+      <div>
+        <div class="skill-group-label">Platforms</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Meta Quest</span>
+          <span class="skill-tag">HoloLens 2</span>
+          <span class="skill-tag">Android</span>
+          <span class="skill-tag">Custom VR headsets</span>
+        </div>
+      </div>
+      <div>
+        <div class="skill-group-label">Engineering</div>
+        <div class="skill-tags">
+          <span class="skill-tag">App architecture</span>
+          <span class="skill-tag">Multiplayer (Photon)</span>
+          <span class="skill-tag">REST API</span>
+          <span class="skill-tag">WebSocket</span>
+          <span class="skill-tag">AI integration</span>
+          <span class="skill-tag">Addressables</span>
+          <span class="skill-tag">GPU optimisation</span>
+        </div>
+      </div>
+      <div>
+        <div class="skill-group-label">Tooling</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Git / GitLab</span>
+          <span class="skill-tag">Agile / Scrum</span>
+          <span class="skill-tag">Custom editor tools</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2 class="section-title-text">Experience</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="exp-list">
+
+    <div class="exp-item" style="opacity: 0; transform: translateY(20px); transition: opacity 0.5s, transform 0.5s;">
+      <div class="exp-date">2025 — 2026</div>
+      <div>
+        <div class="exp-company">RadiusXR</div>
+        <div class="exp-role">Senior Unity Developer</div>
+        <ul class="exp-bullets">
+          <li>Managed end-to-end development of a medical Unity application for a custom VR headset</li>
+          <li>Implemented bidirectional communication between Unity and Android native apps</li>
+          <li>Integrated Android native libraries into the Unity project</li>
+          <li>Developed UI systems and interaction flows for clinical use</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item" style="opacity: 0; transform: translateY(20px); transition: opacity 0.5s, transform 0.5s;">
+      <div class="exp-date">2017 — 2025</div>
+      <div>
+        <div class="exp-company">ApoQlar</div>
+        <div class="exp-role">Senior Unity Developer</div>
+        <ul class="exp-bullets">
+          <li>Developed advanced XR applications for medical and enterprise use cases across Meta Quest, HoloLens and mobile</li>
+          <li>Led development of a VR-based rehabilitation game with AI-evaluated movement</li>
+          <li>Built single- and multiplayer features using Photon and UNet</li>
+          <li>Integrated 3rd-party libraries for live streaming, speech-to-text, and volumetric rendering</li>
+          <li>Profiled and optimised apps for XR and mobile devices; performed peer code reviews</li>
+          <li>Implemented client-side backend communication and physics-based game systems</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item" style="opacity: 0; transform: translateY(20px); transition: opacity 0.5s, transform 0.5s;">
+      <div class="exp-date">2022 — 2023</div>
+      <div>
+        <div class="exp-company">Pravna</div>
+        <div class="exp-role">Unity Developer</div>
+        <ul class="exp-bullets">
+          <li>Designed and developed an immersive VR onboarding application end-to-end</li>
+          <li>Created interactive 3D environments across multiple themed rooms</li>
+          <li>Implemented CMS integration for dynamic content and data processing</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2 class="section-title-text">Projects</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="projects-grid">
+
+    <div class="project-card" style="opacity: 0; transform: translateY(20px); transition: opacity 0.5s, transform 0.5s;">
+      <div class="proj-tags">
+        <span class="proj-tag">VR</span>
+        <span class="proj-tag">Meta Quest</span>
+        <span class="proj-tag">Medical</span>
+        <span class="proj-tag">Multiplayer</span>
+      </div>
+      <div class="proj-title">Holomedicine Spaces</div>
+      <p class="proj-desc">A VR social platform for medical 
+professionals enabling collaborative training, meetings, and 
+simulations. Features themed rooms (operating room, conference, 
+training, AI), real-time collaboration, object interaction, and an AI 
+chatbot.</p>
+    </div>
+
+    <div class="project-card" style="opacity: 0; transform: translateY(20px); transition: opacity 0.5s, transform 0.5s;">
+      <div class="proj-tags">
+        <span class="proj-tag">AR</span>
+        <span class="proj-tag">HoloLens</span>
+        <span class="proj-tag">Medical Imaging</span>
+        <span class="proj-tag">Multiplayer</span>
+      </div>
+      <div class="proj-title">VSI HoloMedicine</div>
+      <p class="proj-desc">Advanced medical AR application for HoloLens 
+enabling 3D manipulation of MRI/CT imaging data. Supports surgery 
+planning, tissue segmentation, annotations, multiplayer object sharing, 
+and integrated video consultation.</p>
+    </div>
+
+    <div class="project-card" style="opacity: 0; transform: translateY(20px); transition: opacity 0.5s, transform 0.5s;">
+      <div class="proj-tags">
+        <span class="proj-tag">VR</span>
+        <span class="proj-tag">Meta Quest</span>
+        <span class="proj-tag">Rehabilitation</span>
+        <span class="proj-tag">AI</span>
+      </div>
+      <div class="proj-title">Beer Pong VR Rehab</div>
+      <p class="proj-desc">VR game combining physical rehabilitation 
+with entertainment. AI evaluates patient movement quality, followed by a
+ physics-based beer pong session. Available in single and multiplayer 
+modes.</p>
+    </div>
+
+    <div class="project-card" style="opacity: 0; transform: translateY(20px); transition: opacity 0.5s, transform 0.5s;">
+      <div class="proj-tags">
+        <span class="proj-tag">VR</span>
+        <span class="proj-tag">Android</span>
+        <span class="proj-tag">Clinical</span>
+        <span class="proj-tag">Custom HW</span>
+      </div>
+      <div class="proj-title">Vision Field Examination</div>
+      <p class="proj-desc">Clinical VR application for testing patients'
+ visual field. Paired with an Android tablet interface for 
+ophthalmologists to configure exams, control test flow, and manage 
+patient data.</p>
+    </div>
+
+    <div class="project-card" style="opacity: 0; transform: translateY(20px); transition: opacity 0.5s, transform 0.5s;">
+      <div class="proj-tags">
+        <span class="proj-tag">VR</span>
+        <span class="proj-tag">Meta Quest</span>
+        <span class="proj-tag">Enterprise</span>
+        <span class="proj-tag">CMS</span>
+      </div>
+      <div class="proj-title">Onboarding VR</div>
+      <p class="proj-desc">Immersive onboarding application for new 
+employees with multiple themed rooms — interactive office, quiz room, 
+360° video space, factory simulation, and a final quiz. Includes server 
+support for remote branding and result submission.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- CERTS -->
+<section id="certs">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <h2 class="section-title-text">Certifications</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="certs-row">
+    <div class="cert-card" style="opacity: 0; transform: translateY(20px); transition: opacity 0.5s, transform 0.5s;">
+      <div class="cert-year">2021</div>
+      <div class="cert-name">Unity Certified Professional: Programmer</div>
+      <div class="cert-issuer">Unity Technologies</div>
+    </div>
+    <div class="cert-card" style="opacity: 0; transform: translateY(20px); transition: opacity 0.5s, transform 0.5s;">
+      <div class="cert-year">2017</div>
+      <div class="cert-name">Certified Unity Developer</div>
+      <div class="cert-issuer">Unity Technologies</div>
+    </div>
+    <div class="cert-card" style="opacity: 0; transform: translateY(20px); transition: opacity 0.5s, transform 0.5s;">
+      <div class="cert-year">2011 — 2015</div>
+      <div class="cert-name">BSc Electronics &amp; Telecommunications</div>
+      <div class="cert-issuer">Poznań University of Technology</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header">
+    <span class="section-num">05</span>
+    <h2 class="section-title-text">Contact</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="contact-inner">
+    <div>
+      <div class="contact-headline">Let's build<br>something<br><span>remarkable.</span></div>
+      <p style="color:var(--muted); font-size:14px; max-width:360px;">Open to senior and lead roles in medical XR, enterprise VR/AR, and simulation — remote or hybrid.</p>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:marjackarpinski@gmail.com" class="contact-link">
+        <span class="contact-link-label">Email</span>
+        marjackarpinski@gmail.com
+      </a>
+      <a href="tel:+48669991982" class="contact-link">
+        <span class="contact-link-label">Phone</span>
+        +48 669 991 982
+      </a>
+      <a href="#" class="contact-link">
+        <span class="contact-link-label">Location</span>
+        Poznań, Poland
+      </a>
+      <a href="#" class="contact-link" id="linkedin-link">
+        <span class="contact-link-label">LinkedIn</span>
+        Add your LinkedIn URL →
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 Marcin Jacek Karpiński — Senior Unity Developer
+</footer>
+
+<script>
+  // Subtle fade-in on scroll for sections
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.exp-item, .project-card, .cert-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+
+
+</body></html>
